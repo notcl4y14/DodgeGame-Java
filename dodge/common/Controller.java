@@ -19,16 +19,15 @@ public class Controller {
 	}
 
 	public void update () {
-		System.out.println(this.entity);
-		if (Input.isKeyDown("A")) {
+		if (Input.isKeyDown("Left")) {
 			this.entity.x -= 2;
-		} else if (Input.isKeyDown("D")) {
+		} else if (Input.isKeyDown("Right")) {
 			this.entity.x += 2;
 		}
 
-		if (Input.isKeyDown("W")) {
+		if (Input.isKeyDown("Up")) {
 			this.entity.y -= 2;
-		} else if (Input.isKeyDown("S")) {
+		} else if (Input.isKeyDown("Down")) {
 			this.entity.y += 2;
 		}
 	}
