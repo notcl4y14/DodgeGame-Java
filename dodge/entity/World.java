@@ -29,6 +29,11 @@ public class World {
 		this.count--;
 	}
 
+	public void remove (int index) {
+		this.entities.remove(index);
+		this.count--;
+	}
+
 	public void processCollision (Entity entity) {
 		for (int i = 0; i < this.count; i++) {
 			Entity other = this.entities.get(i);
@@ -64,14 +69,9 @@ public class World {
 			entity.update();
 		}
 
-		// Why we begin iteration at the end?
-		// Because the list wouldn't get "offset" then
 		int size = toDestroy.size();
-		if (size == 0) {
-			return;
-		}
-		for (int i = size; i >= 0; i--) {
-			this.entities.remove((int) toDestroy.get(i));
+		for (int i = 0; i < size; i++) {
+			this.remove(toDestroy.get(i).intValue());
 		}
 	}
 

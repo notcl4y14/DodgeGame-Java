@@ -13,13 +13,7 @@ public class Player extends Box {
 
 	public void onOverlapIn (Entity entity) {
 		if (entity.ID == EntityID.Enemy) {
-			System.out.println("Colliding with Enemy");
-		}
-	}
-
-	public void onOverlapOut (Entity entity) {
-		if (entity.ID == EntityID.Enemy) {
-			System.out.println("Colliding out of the Enemy");
+			this.destroy();
 		}
 	}
 }

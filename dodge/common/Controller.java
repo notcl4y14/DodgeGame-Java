@@ -19,6 +19,7 @@ public class Controller {
 	}
 
 	public void update () {
+		System.out.println(this.entity);
 		if (Input.isKeyDown("A")) {
 			this.entity.x -= 2;
 		} else if (Input.isKeyDown("D")) {

@@ -2,7 +2,7 @@ package dodge.entity;
 
 import java.awt.Graphics2D;
 
-public class Entity {
+public class Entity implements Cloneable {
 	public int x;
 	public int y;
 	public int width;
@@ -23,6 +23,16 @@ public class Entity {
 		this.shouldDestroy = false;
 	}
 
+	public Entity clone () {
+		try {
+			return (Entity) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	public void setPosition (int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -31,6 +41,10 @@ public class Entity {
 	public void setSize (int width, int height) {
 		this.width = width;
 		this.height = height;
+	}
+
+	public void destroy () {
+		this.shouldDestroy = true;
 	}
 
 	// ==== Collision ==== //
