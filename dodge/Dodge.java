@@ -13,6 +13,8 @@ import dodge.core.Input;
 import dodge.core.Runner;
 import dodge.core.Window;
 import dodge.entity.World;
+import dodge.level.Level;
+import dodge.level.LevelScript;
 
 public class Dodge implements IRunnerHandle {
 	public Window window;
@@ -20,6 +22,7 @@ public class Dodge implements IRunnerHandle {
 	public Runner runner;
 	SceneManager sceneManager;
 
+	public Level level;
 	public World world;
 	public Controller controller;
 
@@ -27,8 +30,19 @@ public class Dodge implements IRunnerHandle {
 		this.initCore();
 		this.initCommon();
 
+		level = new Level();
 		world = new World(256);
 		controller = new Controller(null);
+
+		LevelScript script = new LevelScript(4);
+		script.codeData[0] = 1;
+		script.codeData[1] = 2;
+		script.codeData[2] = 100;
+		script.codeData[3] = 10;
+
+		level.lengthTime = 1000 * 5;
+		level.setWorld(world);
+		level.loadScript(script);
 	}
 
 	// ==== Initialize ==== //
@@ -48,7 +62,7 @@ public class Dodge implements IRunnerHandle {
 
 		this.sceneManager.addScene(new dodge.scenes.Boot());
 		this.sceneManager.addScene(new dodge.scenes.MainMenu());
-		this.sceneManager.addScene(new dodge.scenes.Level());
+		this.sceneManager.addScene(new dodge.scenes.SceneLevel());
 
 		this.sceneManager.loadScene("boot");
 	}
@@ -87,6 +101,8 @@ public class Dodge implements IRunnerHandle {
 		graphics.setColor( Color.white );
 		graphics.drawString("FPS: " + this.runner.getFPS(), 0, 10);
 		graphics.drawString("Scene: " + this.sceneManager.currentScene.name, 0, 20);
+		graphics.drawString("Level Time: " + (System.currentTimeMillis() - this.level.startTime) + "/" + this.level.lengthTime, 0, 30);
+		graphics.drawString("Level Finished: " + this.level.finished, 0, 40);
 
 		this.display.present();
 		graphics.dispose();

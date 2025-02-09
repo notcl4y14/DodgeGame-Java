@@ -2,6 +2,9 @@ package dodge.entity;
 
 import java.awt.Graphics2D;
 
+import dodge.entity.entities.Enemy;
+import dodge.entity.entities.Player;
+
 public class Entity implements Cloneable {
 	public int x;
 	public int y;
@@ -28,6 +31,21 @@ public class Entity implements Cloneable {
 			return (Entity) super.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static Entity fromID (EntityID id) {
+		switch (id) {
+			case EntityID.None:
+				return null;
+			
+			case EntityID.Player:
+				return new Player();
+			
+			case EntityID.Enemy:
+				return new Enemy();
 		}
 
 		return null;
